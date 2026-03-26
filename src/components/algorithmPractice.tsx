@@ -37,3 +37,33 @@ function palindrome(arr: string): boolean {
 console.log(palindrome("racecar"));
 
 
+
+
+
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+}
+
+function filterUsers(users: User[], name: string): User[] {
+  return users.filter(user => user.name.toLowerCase === name.toLowerCase);
+}
+
+const users = [
+  { id: 1, name: "Alice", email: "alice@gmail.com" },
+  { id: 2, name: "Bob", email: "bob@gmail.com" },
+  { id: 3, name: "Charlie", email: "charlie@gmail.com" }
+];
+
+console.log(filterUsers(users, "Alice"));
+// → [{ id: 1, name: "Alice", email: "alice@gmail.com" }]
+
+
+
+
+function findDuplicates(arr: number[]): number[]{
+   return arr.filter((num,index)=>arr.indexOf(num)!= index)
+}
+console.log(findDuplicates([1, 2, 2, 3, 4, 4, 5]));

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+
 type User={
   id: number;
   email: string;
@@ -8,6 +9,7 @@ function ListUsers(){
   const[users,setUsers]=useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>();
+   const [count, setCount] = useState<number>(0);
 
   useEffect(()=>{
     const fetchUsers= async ()=>{
@@ -38,18 +40,18 @@ finally{
   if(loading) return <p>Loading</p>;
   if(error)return <p>{error}</p>;
 
-  return(
+  return (
     <div>
-      {
-        users.map((user)=>(
-          <div key={user.id}>
-           <h3>{user.name}</h3>
-           <p>{user.name}</p>
-          </div>
- 
-        ))
-      
-      }
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+      {users.map((user) => (
+        <div key={user.id}>
+          <h3>{user.name}</h3>
+          <p>{user.email}</p>
+        </div>
+      ))}
     </div>
   );
 }
