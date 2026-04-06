@@ -41,3 +41,10 @@ function topKFrequent(nums: number[], k: number): number[] {
 }
 
 console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
+
+
+
+function isPalindrome(s: string): boolean {
+    let newS =  s.toLowerCase().replace(/[^a-z0-9]/g, "");
+    return newS === newS.split('').reverse().join('');
+};
