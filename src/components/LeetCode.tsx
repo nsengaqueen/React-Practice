@@ -42,9 +42,34 @@ function topKFrequent(nums: number[], k: number): number[] {
 
 console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
 
-
-
 function isPalindrome(s: string): boolean {
-    let newS =  s.toLowerCase().replace(/[^a-z0-9]/g, "");
-    return newS === newS.split('').reverse().join('');
+  let newS = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return newS === newS.split("").reverse().join("");
+}
+
+function validPalindrome(s: string): boolean {
+  function isPalin(str: string): boolean {
+    return str === str.split("").reverse().join("");
+  }
+  for (let i = 0; i < s.length; i++) {
+    const newStr = s.slice(0, i) + s.slice(i + 1);
+    if (isPalin(newStr)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+function moveZeroes(nums: number[]): void {
+   
+  let count = nums.length;
+  for(let i=0;i<count;i++){
+    if(nums[i] === 0){
+      nums.splice(i,1);
+      nums.push(0);
+      i--;
+      count--;
+    }
+  }
 };
