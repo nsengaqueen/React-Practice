@@ -127,3 +127,22 @@ function maxArea(height: number[]): number {
  }
  return max
 };
+
+
+function maxProfit(prices: number[]): number {
+  let buy = 0;
+  let sell = 1;
+  let max = 0;
+
+  while (sell < prices.length) {
+    if (prices[sell] < prices[buy]) {
+      buy = sell;
+    } else {
+      let profit = prices[sell] - prices[buy];
+      max = Math.max(max, profit);
+    }
+    sell++;
+  }
+
+  return max;
+}
