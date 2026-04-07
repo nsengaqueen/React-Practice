@@ -121,18 +121,20 @@ function maxArea(height: number[]): number {
 
 
 function maxProfit(prices: number[]): number {
-  let buy = 0;
-  let sell = 1;
+  let minPrice = prices[0];
   let max = 0;
 
-  while (sell < prices.length) {
-    if (prices[sell] < prices[buy]) {
-      buy = sell;
-    } else {
-      let profit = prices[sell] - prices[buy];
-      max = Math.max(max, profit);
+  for (let i = 1; i < prices.length; i++) {
+  
+    if (prices[i] < minPrice) {
+      minPrice = prices[i];
     }
-    sell++;
+
+    let profit = prices[i] - minPrice;
+
+    if (profit > max) {
+      max = profit;
+    }
   }
 
   return max;
@@ -158,4 +160,23 @@ function lengthOfLongestSubstring(s: string): number {
     max = Math.max(max,right-left+1)
   }
  return max
+}
+
+
+
+
+function findMaxAverage(nums: number[], k: number): number{
+  let sum = 0;
+  let max = -Infinity;
+  for(let i =0;i<k;i++){
+    sum+=nums[i]
+  }
+  max = sum/k
+
+  for(let right =k; right<nums.length;right++){
+    sum+=nums[right]
+    sum-=nums[right-k]
+    max = Math.max(max,sum/k)
+  }
+  return max
 }
