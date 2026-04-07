@@ -60,73 +60,64 @@ function validPalindrome(s: string): boolean {
   return false;
 }
 
-
 function moveZeroes(nums: number[]): void {
-   
   let count = nums.length;
-  for(let i=0;i<count;i++){
-    if(nums[i] === 0){
-      nums.splice(i,1);
+  for (let i = 0; i < count; i++) {
+    if (nums[i] === 0) {
+      nums.splice(i, 1);
       nums.push(0);
       i--;
       count--;
     }
   }
-};
+}
 
+function threeSum(nums: number[]): number[][] {
+  const result: number[][] = [];
+  nums.sort((a, b) => a - b);
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+    let left = i + 1;
+    let right = nums.length - 1;
 
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+      if (sum === 0) {
+        result.push([nums[i], nums[left], nums[right]]);
 
+        while (left < right && nums[left] === nums[left + 1]);
 
-function threeSum(nums: number[]): number [][]{
-  const result : number [][]=[];
-  nums.sort((a,b)=>a-b)
-  for(let i=0;i<nums.length-2;i++){
-    if(i>0 && nums[i] === nums[i-1])continue;
-    let left = i+1;
-    let right = nums.length -1;
+        while (left < right && nums[right] === nums[right - 1]);
 
-    while(left<right){
-      const sum = nums[i]+nums[left]+nums[right]
-      if(sum === 0){
-        result.push([nums[i],nums[left],nums[right]])
-
-        while(left <right && nums[left] === nums[left+1]);
-
-        while(left <right && nums[right] === nums[right -1 ]);
-
-        left ++
-        right --
-      }
-      else if(sum<0){
-        left++
-      }
-      else{
-        right --
+        left++;
+        right--;
+      } else if (sum < 0) {
+        left++;
+      } else {
+        right--;
       }
     }
+  }
+  return result;
+}
+
+function maxArea(height: number[]): number {
+  let left = 0;
+  let right = height.length - 1;
+  let max = 0;
+  while (left < right) {
+    let area = Math.min(height[left], height[right]) * (right - left);
+    max = Math.max(max, area);
+    if (height[left] < height[right]) {
+      left++;
+    } else {
+      right--;
     }
-    return result
+  }
+  return max;
 }
 
 
-
-
-function maxArea(height: number[]): number {
- let left = 0;
- let right = height.length-1;
- let max = 0;
- while(left<right){
-    let area = Math.min(height[left],height[right])* (right-left)
-  max = Math.max(max,area);
-  if(height[left]<height[right]){
-    left++
-  }
-  else{
-    right --
-  }
- }
- return max
-};
 
 
 function maxProfit(prices: number[]): number {
@@ -145,4 +136,26 @@ function maxProfit(prices: number[]): number {
   }
 
   return max;
+}
+
+
+
+
+
+
+
+function lengthOfLongestSubstring(s: string): number {
+
+  const  set = new Set<string>();
+  let max = 0;
+  let left = 0;
+  for(let right = 0; right<s.length;right++){
+    while(set.has(s[right])){
+      set.delete(s[left])
+      left++
+    }
+    set.add(s[right])
+    max = Math.max(max,right-left+1)
+  }
+ return max
 }
