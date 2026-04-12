@@ -117,15 +117,11 @@ function maxArea(height: number[]): number {
   return max;
 }
 
-
-
-
 function maxProfit(prices: number[]): number {
   let minPrice = prices[0];
   let max = 0;
 
   for (let i = 1; i < prices.length; i++) {
-  
     if (prices[i] < minPrice) {
       minPrice = prices[i];
     }
@@ -140,43 +136,44 @@ function maxProfit(prices: number[]): number {
   return max;
 }
 
-
-
-
-
-
-
 function lengthOfLongestSubstring(s: string): number {
-
-  const  set = new Set<string>();
+  const set = new Set<string>();
   let max = 0;
   let left = 0;
-  for(let right = 0; right<s.length;right++){
-    while(set.has(s[right])){
-      set.delete(s[left])
-      left++
+  for (let right = 0; right < s.length; right++) {
+    while (set.has(s[right])) {
+      set.delete(s[left]);
+      left++;
     }
-    set.add(s[right])
-    max = Math.max(max,right-left+1)
+    set.add(s[right]);
+    max = Math.max(max, right - left + 1);
   }
- return max
+  return max;
 }
 
-
-
-
-function findMaxAverage(nums: number[], k: number): number{
+function findMaxAverage(nums: number[], k: number): number {
   let sum = 0;
   let max = -Infinity;
-  for(let i =0;i<k;i++){
-    sum+=nums[i]
+  for (let i = 0; i < k; i++) {
+    sum += nums[i];
   }
-  max = sum/k
+  max = sum / k;
 
-  for(let right =k; right<nums.length;right++){
-    sum+=nums[right]
-    sum-=nums[right-k]
-    max = Math.max(max,sum/k)
+  for (let right = k; right < nums.length; right++) {
+    sum += nums[right];
+    sum -= nums[right - k];
+    max = Math.max(max, sum / k);
   }
-  return max
+  return max;
+}
+
+function removeDuplicates(nums: number[]): number {
+  let left = 0;
+  for (let right = 1; right < nums.length; right++) {
+    if (nums[right] !== nums[left]) {
+      left++;
+      nums[left] = nums[right];
+    }
+  }
+  return left + 1;
 }
