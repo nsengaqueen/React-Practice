@@ -34,8 +34,8 @@ function Counter() {
       <button onClick={handleReset}>Reset</button>
 
       <h3>History:</h3>
-      {history.map((item) => (
-        <p>{item}</p>
+      {history.map((item, index) => (
+        <p key={index}>{item}</p>
       ))}
     </div>
   );
